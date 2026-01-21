@@ -21,5 +21,12 @@ public class Market {
   String description;
   LocalDateTime expiryTime;
   MarketStatus status;
+  
+  public Market(String question, String description, LocalDateTime expiryTime) {
+    this.question = question;
+    this.description = description;
+    this.expiryTime = expiryTime;
+    this.status = MarketStatus.OPEN;
+  }
     
 }

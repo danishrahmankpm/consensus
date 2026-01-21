@@ -1,0 +1,35 @@
+package com.consensus.demo.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.consensus.demo.domain.market.Market;
+import com.consensus.demo.domain.market.MarketState;
+import com.consensus.demo.dto.request.CreateMarketRequest;
+import com.consensus.demo.repository.MarketRepository;
+import com.consensus.demo.repository.MarketStateRepository;
+import com.consensus.demo.utils.utils;
+
+public class MarketService {
+    @Autowired
+    MarketStateRepository marketStateRepository;
+    @Autowired
+    MarketRepository marketRepository;
+    
+    public Long CreateMarket(CreateMarketRequest request) {
+
+        // Implementation for creating a market
+        if (!utils.validateExpiry(request.getExpiryTime())) {
+            throw new IllegalArgumentException("Expiry time must be in the future");
+        }
+        Market market=new Market(request.getQuestion(),request.getDescription(),request.getExpiryTime());
+        Market savedMarket=marketRepository.save(market);
+
+        double initialShares=request.getLiquidity()*Math.log(2);
+        MarketState marketState=new MarketState(savedMarket.getId(),initialShares,initialShares,request.getLiquidity());
+
+        marketStateRepository.save(marketState);
+
+
+        return savedMarket.getId(); 
+    }
+}
