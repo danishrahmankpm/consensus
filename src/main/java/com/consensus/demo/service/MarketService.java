@@ -1,6 +1,7 @@
 package com.consensus.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.consensus.demo.domain.market.Market;
 import com.consensus.demo.domain.market.MarketState;
@@ -9,15 +10,19 @@ import com.consensus.demo.repository.MarketRepository;
 import com.consensus.demo.repository.MarketStateRepository;
 import com.consensus.demo.utils.utils;
 
+import jakarta.transaction.Transactional;
+@Service
+
 public class MarketService {
     @Autowired
     MarketStateRepository marketStateRepository;
     @Autowired
     MarketRepository marketRepository;
     
+    @Transactional
     public Long CreateMarket(CreateMarketRequest request) {
 
-        // Implementation for creating a market
+        
         if (!utils.validateExpiry(request.getExpiryTime())) {
             throw new IllegalArgumentException("Expiry time must be in the future");
         }
