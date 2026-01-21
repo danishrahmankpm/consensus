@@ -37,4 +37,9 @@ public class MarketService {
 
         return savedMarket.getId(); 
     }
+    public Market getMarketById(Long marketId) {
+        return marketRepository.findById(marketId)
+                .orElseThrow(() -> new IllegalArgumentException("Market not found with id: " + marketId));
+    }
+    
 }
