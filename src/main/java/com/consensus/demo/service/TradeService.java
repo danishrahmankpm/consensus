@@ -17,15 +17,15 @@ public class TradeService {
     @Autowired
     TradeService tradeService;
     
-    public Trade executeTrade(Long userId, Double amount, TradeType tradeType) {
+    public Trade executeTrade(Long userId, Long marketId, Double amount, TradeType tradeType) {
         // Trade execution logic
         try{
-            Market market = marketService.getMarketById(userId);
+            Market market = marketService.getMarketById(marketId);
         }
         catch(Exception e){
            throw e;
         }
-        MarketState marketState = marketService.getMarketStateById(userId);
+        MarketState marketState = marketService.getMarketStateById(marketId);
         double price;
         if(tradeType==TradeType.BUY){
             price=pricingService.costToBuyYes(marketState.getYesShares(), marketState.getNoShares(), amount, marketState.getLiquidity());

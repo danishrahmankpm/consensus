@@ -7,6 +7,7 @@ import lombok.Data;
 
 @Data
 public class BuyTradeRequest {
+    Long userId;
     Long marketId;
     Double amount;
     TradeType tradeType;
