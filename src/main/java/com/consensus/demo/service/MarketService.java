@@ -41,5 +41,8 @@ public class MarketService {
         return marketRepository.findById(marketId)
                 .orElseThrow(() -> new IllegalArgumentException("Market not found with id: " + marketId));
     }
-    
+    public MarketState getMarketStateById(Long marketId) {
+        return marketStateRepository.findById(marketId)
+                .orElseThrow(() -> new IllegalArgumentException("MarketState not found with id: " + marketId));
+    }
 }
