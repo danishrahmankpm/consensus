@@ -40,7 +40,6 @@ public class WalletService {
     public void debit(Long userId,
                       double amount,
                       String reason,
-                      Long marketId,
                       Long tradeId) {
 
         Wallet wallet = getWalletForUpdate(userId);
@@ -49,7 +48,7 @@ public class WalletService {
         walletRepository.save(wallet);
 
         ledgerRepository.save(
-                new Ledger(userId, -amount, reason, marketId, tradeId)
+                new Ledger(userId, -amount, reason, tradeId)
         );
     }
 
@@ -69,7 +68,7 @@ public class WalletService {
         walletRepository.save(wallet);
 
         ledgerRepository.save(
-                new Ledger(userId, amount, reason, marketId, tradeId)
+                new Ledger(userId, amount, reason,tradeId)
         );
     }
 }

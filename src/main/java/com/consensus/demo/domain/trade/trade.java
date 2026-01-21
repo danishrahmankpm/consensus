@@ -37,6 +37,12 @@ public class Trade {
     @Column(nullable = false)
     private Instant createdAt;
 
-    
+    public Trade(Long userId, Long marketId, TradeType tradeType, double quantity, double cost) {
+        this.userId = userId;
+        this.marketId = marketId;
+        this.tradeType = tradeType;
+        this.quantity = quantity;
+        this.cost = cost;
+        this.createdAt = Instant.now();
+    }
 }
-

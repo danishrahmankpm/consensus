@@ -28,6 +28,9 @@ public class Ledger {
     @Column(nullable = false)
     private Instant createdAt;
 
+    @Column
+    private Long tradeId; // optional link to a trade
+
     protected Ledger() {}
 
     public Ledger(Long userId, double delta, String reason) {
@@ -36,7 +39,11 @@ public class Ledger {
         this.reason = reason;
         this.createdAt = Instant.now();
     }
-
-    
+    public Ledger(Long userId, double delta, String reason, Long tradeId) {
+        this.userId = userId;
+        this.delta = delta;
+        this.reason = reason;
+        this.tradeId = tradeId;
+        this.createdAt = Instant.now();
+    }
 }
-

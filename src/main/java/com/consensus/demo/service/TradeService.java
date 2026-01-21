@@ -33,10 +33,10 @@ public class TradeService {
         else{
             price=pricingService.costToBuyNo(marketState.getYesShares(), marketState.getNoShares(), amount, marketState.getLiquidity());
         }
-        
 
+        walletService.debit(userId, price, tradeType.toString(), userId);
 
-        return new Trade();
+        return new Trade(userId, marketState.getMarketId(), tradeType, amount, price);
     }
     
 }
